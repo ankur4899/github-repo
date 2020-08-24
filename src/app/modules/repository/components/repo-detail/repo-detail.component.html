@@ -1,0 +1,55 @@
+<div class="main-container" fxLayout="column" fxLayoutGap="5px">
+    <mat-card>
+        <mat-card-header fxLayoutAlign="center center">
+            <div class="fs-18 mat-body-strong">Repository Details</div>
+        </mat-card-header>
+        <mat-card-content>
+            <div fxLayout="row wrap">
+
+                <div fxFlex="50%" class="mat-body-strong">Id</div>
+                <div fxFlex="50%">
+                    {{repoData?.id}}
+                </div>
+                <div fxFlex="50%" class="mat-body-strong">Name</div>
+                <div fxFlex="50%">
+                    {{repoData?.name}}
+                </div>
+
+                <div fxFlex="50%" class="mat-body-strong">Full Name</div>
+                <div fxFlex="50%">
+                    {{repoData?.full_name}}
+                </div>
+                <div fxFlex="50%" class="mat-body-strong">Owner</div>
+                <div fxFlex="50%">
+                    {{repoData?.owner?.login}}
+                </div>
+                <div fxFlex="50%" class="mat-body-strong">Language</div>
+                <div fxFlex="50%">
+                    {{repoData?.language}}
+                </div>
+                <div fxFlex="50%" class="mat-body-strong">URL</div>
+                <div fxFlex="50%">
+                    <a href="{{repoData?.url}}">{{repoData?.url}}</a>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-header fxLayoutAlign="center center">
+            <div class="fs-18 mat-body-strong">Contributors List</div>
+        </mat-card-header>
+        <mat-card-content fxLayout="column">
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayout.lt-sm="column"
+                fxLayoutAlign.lt-sm="start stretch">
+                <mat-list fxFlexFill>
+                    <mat-list-item *ngFor="let contributor of contributorList; last as last">
+                        <img height="20px" width="20px" [src]="contributor.avatar_url" />
+                        <h4 mat-line>{{contributor.login}}</h4>
+                        <mat-divider *ngIf="!last"></mat-divider>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

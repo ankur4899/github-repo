@@ -1,0 +1,54 @@
+<div class="main-container" fxLayout="column" fxLayoutGap="5px">
+    <mat-card>
+        <mat-card-header fxLayoutAlign="center center">
+            <div class="fs-18 mat-body-strong">Repository List</div>
+        </mat-card-header>
+        <mat-tab-group>
+            <mat-tab label="All Repository">
+                <mat-card>
+                    <mat-card-content fxLayout="column">
+                        <div fxLayout="row" fxLayoutAlign="start center" fxLayout.lt-sm="column"
+                            fxLayoutAlign.lt-sm="start stretch">
+                            <mat-list fxFlexFill>
+                                <mat-list-item class="mat-cursor-pointer" (click)="repoDetails(repo)"
+                                    *ngFor="let repo of repoList let i=index; last as last">
+                                    <h3 mat-list-icon>{{i+1}}</h3>
+                                    <h4 mat-line>{{repo.name}}</h4>
+                                    <p mat-line> {{repo.full_name}} </p>
+                                    <button *ngIf="!repo.isFavourite"
+                                        (click)="addAsFavourite(repo); $event.stopPropagation()" mat-button
+                                        mat-raised-button color="primary">Add as Favourite</button>
+                                    <mat-icon *ngIf="repo.isFavourite">star</mat-icon>
+                                    <mat-divider *ngIf="!last"></mat-divider>
+                                </mat-list-item>
+                            </mat-list>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </mat-tab>
+            <mat-tab label="Favourite Repository">
+                <mat-card>
+                    <mat-card-content *ngIf="favouriteList.length>0" fxLayout="column">
+                        <div fxLayout="row" fxLayoutAlign="start center" fxLayout.lt-sm="column"
+                            fxLayoutAlign.lt-sm="start stretch">
+                            <mat-list fxFlexFill>
+                                <mat-list-item (click)="repoDetails(repo)"
+                                    *ngFor="let repo of favouriteList let i=index; last as last">
+                                    <h3 mat-list-icon>{{i+1}}</h3>
+                                    <h4 mat-line>{{repo.name}}</h4>
+                                    <p mat-line> {{repo.full_name}} </p>
+                                    <mat-divider *ngIf="!last"></mat-divider>
+                                </mat-list-item>
+                            </mat-list>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-content fxLayout="column" *ngIf="favouriteList.length===0">
+                        <div>
+                            <p>There are no Favourite Repositories</p>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card>
+</div>
